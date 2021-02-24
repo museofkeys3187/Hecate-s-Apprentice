@@ -1,0 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class NewBehaviourScript : MonoBehaviour
+{
+    public float attack;
+    public float attackRange;
+    public float attackRate;
+    public float recharge;
+    public float enemyKnockBack;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(Input.GetButtonDown(J))
+        {
+            ArcaneOrb();
+        }
+        else if(Input.GetButtonDown(K))
+        {
+            ScatteredMagic();
+        }
+        else if(Input.GetButtonDown(L))
+        {
+            Shield();
+        }
+        else if (Input.GetButtonDown(KeyCode.Space))
+        {
+            BasicAttack();
+        }
+    }
+    void ArcaneOrb()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(out hit, attackRange))
+        {
+            attack = 5f;
+            Debug.Log("Orb Connected");
+        }
+    }
+    void ScatteredMagic()
+    {
+
+    }
+    void Shield()
+    {
+
+    }
+    void BasicAttack()
+    {
+
+    }
+}
