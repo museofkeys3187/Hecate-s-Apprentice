@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class enemyBehavior : MonoBehaviour
+{
+    //set an object for the player, the speed, and a rigidbody for the enemy
+    public Transform hero;
+    public float spd = 10f;
+    Rigidbody enemy;
+    void Start()
+    {
+        //have the enemy Rigidbody access the Unity ridgidbody
+        enemy = GetComponent<Rigidbody>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    private void FixedUpdate()
+    {
+        //get the Vector3 for the movement action and have it move at the hero at spd
+        Vector3 enemyMove = Vector3.MoveTowards(transform.position, hero.position, spd * Time.fixedDeltaTime);
+        enemy.MovePosition(enemyMove);
+        transform.LookAt(hero);
+    }
+    
+
+
+}
