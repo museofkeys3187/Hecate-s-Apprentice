@@ -18,19 +18,19 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown(J))
+        if(Input.GetButtonDown("J"))
         {
             ArcaneOrb();
         }
-        else if(Input.GetButtonDown(K))
+        else if(Input.GetButtonDown("K"))
         {
             ScatteredMagic();
         }
-        else if(Input.GetButtonDown(L))
+        else if(Input.GetButtonDown("L"))
         {
             Shield();
         }
-        else if (Input.GetButtonDown(KeyCode.Space))
+        else if (Input.GetButtonDown("Space"))
         {
             BasicAttack();
         }
@@ -38,7 +38,7 @@ public class NewBehaviourScript : MonoBehaviour
     void ArcaneOrb()
     {
         RaycastHit hit;
-        if(Physics.Raycast(out hit, attackRange))
+        if(Physics.Raycast(transform.position, Vector3.left, out hit, 0.01f))
         {
             attack = 5f;
             Debug.Log("Orb Connected");
@@ -46,14 +46,14 @@ public class NewBehaviourScript : MonoBehaviour
     }
     void ScatteredMagic()
     {
-
+        Debug.Log("ScatteredMagic");
     }
     void Shield()
     {
-
+        Debug.Log("Shield");
     }
     void BasicAttack()
     {
-
+        Debug.Log("BasicAttack");
     }
 }
