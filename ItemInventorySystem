@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ItemInventorySystem : MonoBehaviour
+{
+    private Inventory pockets;
+    // Start is called before the first frame update
+    void Start()
+    {
+        pockets = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            for(space = 0; space < pockets.inventory.length; space++)
+            {
+                if(pockets.inventoryFull == false)
+                {
+                    pockets.inventoryFull = true;
+                    break;
+                }
+            }
+        }
+    }
