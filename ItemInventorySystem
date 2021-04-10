@@ -15,7 +15,7 @@ public class ItemInventorySystem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            for(space = 0; space < pockets.inventory.length; space++)
+            for(int space = 0; space < pockets.inventory.length; space++)
             {
                 if(pockets.inventoryFull == false)
                 {
