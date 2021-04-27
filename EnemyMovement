@@ -1,32 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class enemyBehavior : MonoBehaviour
+public class BasicEnemyMovement : MonoBehaviour
 {
-    //set an object for the player, the speed, and a rigidbody for the enemy
-    public Transform hero;
-    public float spd = 10f;
-    Rigidbody enemy;
-    void Start()
-    {
-        //have the enemy Rigidbody access the Unity ridgidbody
-        enemy = GetComponent<Rigidbody>();
-    }
+    public Transform target;
+    public float enemyWalkSpd;
+    public float minDist;
+    public float maxDist;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.LookAt(target);
+        if(Vector2.Distance(transform.position, target.position) >= minDist)
+        {
+            transform.position += transform.forward * enemyWalkSpd * Time.deltaTime;
+        }
     }
-    private void FixedUpdate()
-    {
-        //get the Vector3 for the movement action and have it move at the hero at spd
-        Vector3 enemyMove = Vector3.MoveTowards(transform.position, hero.position, spd * Time.fixedDeltaTime);
-        enemy.MovePosition(enemyMove);
-        transform.LookAt(hero);
-    }
-    
-
-
 }
