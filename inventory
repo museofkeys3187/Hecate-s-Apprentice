@@ -1,0 +1,68 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Inventory : MonoBehaviour
+{
+    public bool[] inventoryFull;
+    public GameObject[] inventory;
+
+//control for combinding ingredients 
+    private Vector2 mouse;
+    float offsetX, offsetY;
+    static bool mouseButtonPressed;
+
+    void OnMouseDown()
+    {
+        mouseButtonPressed = false;
+        offsetX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x;
+        offsetY = Camera.main.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y;
+    }
+
+    void OnMouseDrag()
+    {
+        mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = new Vector2(mouse.x - offsetX, mouse.y - offsetY);
+    }
+
+    void OnMouseUp()
+    {
+        mouseButtonPressed = true;
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        string itemType;
+        string GameObjectItem;
+
+        itemType = gameObject.name.Substring(0, name.IndexOf("_"));
+        GameObjectItem = collision.gameObject.name.Substring(0, name.IndexOf("_"));
+
+        if((mouseButtonPressed && itemType == "heal") && (itemType == GameObjectItem))
+        {
+            Instantiate(Resources.Load("HealPotion"), transform.position, Quaternion.identity);
+            mouseButtonPressed = false;
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+        else if ((mouseButtonPressed && itemType == "stat") && (itemType == GameObjectItem))
+        {
+            Instantiate(Resources.Load("StatsPotion"), transform.position, Quaternion.identity);
+            mouseButtonPressed = false;
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+        else if ((mouseButtonPressed && itemType == "attack") && (itemType == GameObjectItem))
+        {
+            Instantiate(Resources.Load("AttackPotion"), transform.position, Quaternion.identity);
+            mouseButtonPressed = false;
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+        else
+        {
+            //add in any other potion combinations after you are sure these work through collision
+        }
+    }
+
+}
