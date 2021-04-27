@@ -8,6 +8,9 @@ public class PlayerControls : MonoBehaviour
     private Rigidbody2D playerRb;
     Vector2 playerMovement;
     public float hearts;
+    public float enemyAttackDamage;
+    public GameObject projectile;
+    public float spellSpd;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +23,26 @@ public class PlayerControls : MonoBehaviour
         playerMovement.x = Input.GetAxisRaw("Horizontal");
         playerMovement.y = Input.GetAxisRaw("Vertical");
         playerRb.MovePosition(playerRb.position + playerMovement * spd * Time.fixedDeltaTime);
+        if (Input.GetButtonDown("attack"))
+        {
+            GameObject spell = Instantiate(projectile, transform.position, transform.rotation);
+            //spell.velocity = transform.forward * spellSpd;
+        }
        
     }
     void OnTriggerenter2d(Collider2D other)
     {
-       
+        Debug.Log("contact");
+        if (Input.GetButtonDown("attack"))
+        {
+            //run the attack animation
+            //delete enemy on collision
+            //run enemy death animation
+            //delete enemy death animation
+        }
+        else
+        {
+            //hearts = hearts - enemyAttackDamage;
+        }
     }
 }
