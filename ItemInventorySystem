@@ -15,13 +15,14 @@ public class ItemInventorySystem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            for(int space = 0; space < pockets.inventory.length; space++)
+            for(int space = 0; space < pockets.inventory.Length; space++)
             {
-                if(pockets.inventoryFull == false)
+                if(pockets.inventoryFull[space] == false)
                 {
-                    pockets.inventoryFull = true;
+                    pockets.inventoryFull[space] = true;
                     break;
                 }
             }
         }
     }
+}
