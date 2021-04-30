@@ -5,44 +5,43 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour
 {
     public float spd;
-    private Rigidbody2D playerRb;
-    Vector2 playerMovement;
-    public float hearts;
-    public float enemyAttackDamage;
-    public GameObject projectile;
-    public float spellSpd;
+
     // Start is called before the first frame update
     void Start()
     {
-        playerRb = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerMovement.x = Input.GetAxisRaw("Horizontal");
-        playerMovement.y = Input.GetAxisRaw("Vertical");
-        playerRb.MovePosition(playerRb.position + playerMovement * spd * Time.fixedDeltaTime);
-        if (Input.GetButtonDown("attack"))
-        {
-            GameObject spell = Instantiate(projectile, transform.position, transform.rotation);
-            //spell.velocity = transform.forward * spellSpd;
-        }
-       
+        PlayerMovement();
     }
-    void OnTriggerenter2d(Collider2D other)
+    private void PlayerMovement()
     {
-        Debug.Log("contact");
-        if (Input.GetButtonDown("attack"))
+        float xOffset = 0f;
+        float yOffset = 0f;
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            //run the attack animation
-            //delete enemy on collision
-            //run enemy death animation
-            //delete enemy death animation
+            yOffset = +1f;
         }
-        else
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            //hearts = hearts - enemyAttackDamage;
+            xOffset = -1f;
         }
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            yOffset = -1f;
+        }
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            xOffset = +1f;
+        }
+        Vector3 walkDirection = new Vector3(xOffset, yOffset).normalized;
+        transform.position += walkDirection * spd * Time.deltaTime;
+    }
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log("Collision Detected");
     }
 }
