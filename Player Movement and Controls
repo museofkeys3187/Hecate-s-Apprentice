@@ -16,6 +16,11 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         PlayerMovement();
+        if (Input.GetButtonDown("attack"))
+        {
+            GameObject spell = Instantiate(projectile, transform.position, transform.rotation);
+            //spell.velocity = transform.forward * spellSpd;
+        }
     }
     private void PlayerMovement()
     {
