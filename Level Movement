@@ -5,9 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class LevelMovement : MonoBehaviour
 {
+//on trigger event with the player
     void OnTriggerEnter(Collider other)
     {
+    //pick a random number from the range 1-8 and assign it to levelNum
         int levelNum = Random.Range(1,8);
+        //load the scene associated with that number
         SceneManager.LoadScene(levelNum);
         
     }
