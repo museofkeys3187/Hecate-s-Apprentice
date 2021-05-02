@@ -12,36 +12,47 @@ public class Health : MonoBehaviour
     public Image[] numOfHearts;
     public Sprite fullHealth;
     public Sprite emptyHealth;
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        if(currentHealth > totalHealth)
+        if (currentHealth > totalHealth)
         {
             currentHealth = totalHealth;
         }
-        if(currentHealth == 0)
+        if (currentHealth == 0)
         {
             //destroy character and go to game over screen
         }
-        for(int i = 0; i < numOfHearts.Length; i++)
+        for (int i = 0; i < numOfHearts.Length; i++)
         {
             if (i < totalHealth)
             {
                 numOfHearts[i].enabled = true;
             }
-            else 
+            else
             {
                 numOfHearts[i].enabled = false;
             }
-            if(i < currentHealth)
+            if (i < currentHealth)
             {
                 numOfHearts[i].sprite = fullHealth;
             }
             else
             {
                 numOfHearts[i].sprite = emptyHealth;
+            }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "HealthPotion")
+        {
+            currentHealth = currentHealth + 1;
+            if(currentHealth > totalHealth)
+            {
+                totalHealth = currentHealth;
             }
         }
     }
