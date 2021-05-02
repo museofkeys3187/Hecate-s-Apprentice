@@ -63,5 +63,9 @@ public class Health : MonoBehaviour
                 
             }
         }
+        else if((collider.gameObject.tag == "Projectile")|| (collider.gameObject.tag == "WalkEnemy"))
+        {
+            currentHealth = currentHealth - 1;
+        }
     }
 }
