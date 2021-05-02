@@ -52,7 +52,15 @@ public class Health : MonoBehaviour
             currentHealth = currentHealth + 1;
             if(currentHealth > totalHealth)
             {
-                totalHealth = currentHealth;
+                if(totalHealth < 4)
+                {
+                    totalHealth = currentHealth;
+                }
+                else
+                {
+                    Debug.Log("You are already at full health!");
+                }
+                
             }
         }
     }
